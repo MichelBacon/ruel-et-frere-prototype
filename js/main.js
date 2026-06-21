@@ -1,5 +1,11 @@
 // ===== Ruel et Frère — shared interactions =====
 (function(){
+  // mark JS active so CSS only hides .reveal elements when we can reveal them
+  document.documentElement.classList.add('js');
+  const showAll = () => document.querySelectorAll('.reveal:not(.in)').forEach(e=>e.classList.add('in'));
+  // failsafe: if anything below throws or the observer never fires, reveal everything
+  window.addEventListener('load', ()=>setTimeout(showAll, 1200));
+
   const header = document.querySelector('.header');
   const burger = document.querySelector('.burger');
   const nav = document.querySelector('.nav');
@@ -25,11 +31,15 @@
     }));
   }
 
-  // reveal on scroll
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
-  },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  // reveal on scroll (guarded: any failure falls back to showing everything)
+  try{
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+      },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
+      document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    } else { showAll(); }
+  }catch(_){ showAll(); }
 
   // product brand tabs
   document.querySelectorAll('[data-tab]').forEach(btn=>{

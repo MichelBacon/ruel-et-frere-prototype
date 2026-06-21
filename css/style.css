@@ -213,8 +213,9 @@ section{position:relative}
 .cat-item[open] summary .chev{transform:rotate(180deg)}
 .swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;padding:8px 26px 28px}
 .swatch{display:flex;flex-direction:column;gap:8px}
-.swatch .ph{aspect-ratio:1;border-radius:10px;overflow:hidden;background:var(--sand);box-shadow:var(--shadow-sm)}
-.swatch .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+/* padding-box square: works on every browser (no aspect-ratio dependency) */
+.swatch .ph{position:relative;height:0;padding-bottom:100%;border-radius:10px;overflow:hidden;background:var(--sand);box-shadow:var(--shadow-sm)}
+.swatch .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
 .swatch:hover .ph img{transform:scale(1.08)}
 .swatch .t{font-size:.82rem;color:var(--ink);line-height:1.35;font-weight:500}
 .cat-cathead{max-width:1100px;margin:0 auto 22px;display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -281,9 +282,18 @@ section{position:relative}
 .lightbox .nav-btn:hover{background:var(--brick)}
 .lightbox .prev{left:24px}.lightbox .next{right:24px}
 
-/* reveal on scroll */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
-.reveal.in{opacity:1;transform:none}
+/* reveal on scroll — only hide when JS is active (html.js), so content is
+   never stuck invisible if JS fails to run on the device */
+html.js .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+html.js .reveal.in{opacity:1;transform:none}
+
+/* aspect-ratio fallback for older mobile Safari / webviews */
+@supports not (aspect-ratio: 1 / 1){
+  .prod-card,.proj-feat .item,.gal .item{height:auto}
+  .prod-card{min-height:300px}
+  .proj-feat .item{min-height:240px}
+  .split .media{min-height:380px}
+}
 
 /* ===== Accessibility (ui-ux-pro-max: focus-states + reduced-motion, severity HIGH) ===== */
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,
