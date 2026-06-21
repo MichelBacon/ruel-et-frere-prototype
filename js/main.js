@@ -42,14 +42,16 @@
     });
   });
 
-  // catalogue accordion: force-load lazy swatches when a panel opens
-  // (lazy images inside a collapsed <details>/display:none don't auto-load on reveal)
+  // catalogue accordion: force-load swatches when a panel is/becomes open.
+  // Lazy images inside a collapsed <details> (display:none) don't reliably
+  // load on reveal — Safari especially. Switching to eager forces the fetch.
+  const eagerLoad = d => d.querySelectorAll('img[loading="lazy"]').forEach(img=>{
+    img.loading='eager';
+    if(!img.complete){ const s=img.getAttribute('src'); img.setAttribute('src',s); } // nudge
+  });
   document.querySelectorAll('.cat-item').forEach(d=>{
-    d.addEventListener('toggle',()=>{
-      if(d.open){
-        d.querySelectorAll('img[loading="lazy"]').forEach(img=>{img.loading='eager';});
-      }
-    });
+    if(d.open) eagerLoad(d);                         // default-open panel: load immediately
+    d.addEventListener('toggle',()=>{ if(d.open) eagerLoad(d); });
   });
 
   // lightbox gallery
