@@ -42,6 +42,16 @@
     });
   });
 
+  // catalogue accordion: force-load lazy swatches when a panel opens
+  // (lazy images inside a collapsed <details>/display:none don't auto-load on reveal)
+  document.querySelectorAll('.cat-item').forEach(d=>{
+    d.addEventListener('toggle',()=>{
+      if(d.open){
+        d.querySelectorAll('img[loading="lazy"]').forEach(img=>{img.loading='eager';});
+      }
+    });
+  });
+
   // lightbox gallery
   const items = [...document.querySelectorAll('[data-lightbox]')];
   if(items.length){
