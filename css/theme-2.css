@@ -1,0 +1,45 @@
+/* ===== Theme 2 — "Atelier Bleu" : slate + teal, geometric, editorial ===== */
+:root{
+  --brick:#0f766e;          /* teal accent */
+  --brick-dark:#0b5750;
+  --charcoal:#10212b;       /* deep slate */
+  --ink:#1f3540;
+  --gray:#5a6f78;
+  --line:#dde6e8;
+  --cream:#f4f7f7;
+  --sand:#e6eeef;
+  --white:#ffffff;
+  --radius:4px;             /* sharper, architectural */
+  --shadow:0 18px 50px -18px rgba(16,33,43,.35);
+  --shadow-sm:0 8px 22px -12px rgba(16,33,43,.3);
+  --ease:cubic-bezier(.16,.84,.44,1);
+  --font-body:'Space Grotesk',system-ui,sans-serif;
+  --font-head:'DM Serif Display','Times New Roman',serif;
+}
+h1,h2,h3,h4{letter-spacing:-.02em}
+.hero h1 em,.hero-eyebrow{color:#7fd1c8}
+.split .badge .sm,.stats .stat .n em,.prod-card .more,.proj-feat .item .cap span,.gal .item .cap span,.subhero .crumb{color:#7fd1c8}
+
+/* sharper buttons */
+.btn{border-radius:4px;text-transform:uppercase;letter-spacing:.08em;font-size:.82rem}
+
+/* eyebrow becomes a ticked label */
+.eyebrow{letter-spacing:.3em}
+.eyebrow::before{content:"";display:inline-block;width:26px;height:1.5px;background:var(--brick);margin-right:12px;vertical-align:middle}
+.sec-head.center .eyebrow::before{display:none}
+
+/* hero: left rule + flatter gradient */
+.hero::after{background:linear-gradient(75deg,rgba(7,18,24,.88) 0%,rgba(7,18,24,.45) 60%,rgba(7,18,24,.1) 100%)}
+.hero-content{border-left:3px solid var(--brick);padding-left:clamp(18px,3vw,40px)}
+
+/* stats band lighter, teal numerals */
+.stats{background:var(--charcoal)}
+.stats .stat .n{color:#7fd1c8}
+
+/* product cards: gallery look, square corners + thin frame on hover */
+.prod-card{border-radius:4px;border:1px solid transparent}
+.prod-card:hover{border-color:var(--brick)}
+
+/* section heads use a number kicker via data-num */
+.sec-head[data-num]::after{content:attr(data-num);position:absolute;top:-10px;right:0;font-family:var(--font-head);font-size:5rem;color:var(--sand);line-height:1;z-index:-1}
+.sec-head{position:relative}

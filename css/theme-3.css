@@ -1,0 +1,80 @@
+/* ===== Theme 3 — "Nocturne" : dark mode, amber/gold accent, bold ===== */
+:root{
+  --brick:#d99a4e;          /* amber/gold accent */
+  --brick-dark:#b97e36;
+  --charcoal:#0b0c10;       /* near-black */
+  --ink:#ece7df;           /* light text on dark */
+  --gray:#9b958a;
+  --line:#2a2b31;
+  --cream:#121318;          /* page bg (dark) */
+  --sand:#1a1c22;           /* raised dark panel */
+  --white:#1a1c22;          /* "cards" become dark panels */
+  --radius:18px;
+  --shadow:0 24px 60px -20px rgba(0,0,0,.7);
+  --shadow-sm:0 10px 30px -14px rgba(0,0,0,.65);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --font-body:'Inter',system-ui,sans-serif;
+  --font-head:'Syne','Times New Roman',sans-serif;
+}
+body{background:var(--cream);color:var(--ink)}
+h1,h2,h3,h4{color:#fff;letter-spacing:-.02em}
+.sec-head p,.split p,.value p,.branch p{color:var(--gray)}
+.hero h1 em,.hero-eyebrow{color:#f0c987}
+.split .badge .sm,.stats .stat .n em,.prod-card .more,.proj-feat .item .cap span,.gal .item .cap span,.subhero .crumb{color:#f0c987}
+
+/* header glass goes dark */
+.header.scrolled::before{background:rgba(11,12,16,.9);border-bottom:1px solid var(--line)}
+.header.scrolled .logo img,.header.solid .logo img{filter:brightness(0) invert(1)}
+.header.scrolled .nav a,.header.solid .nav a{color:var(--ink)}
+.header.scrolled .burger span,.header.solid .burger span{background:var(--ink)}
+
+/* buttons: bold uppercase, gold primary */
+.btn{font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.btn-primary{background:var(--brick);color:#1a1206}
+.btn-primary:hover{background:var(--brick-dark)}
+.btn-dark{background:#fff;color:#0b0c10}
+.btn-dark:hover{background:#f0c987}
+
+/* lead text brighter */
+.lead{color:#fff}
+
+/* stats band: keep dark but with hairline frame + gold rule */
+.stats{background:#0b0c10;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats .stat{position:relative}
+.stats .stat .n{color:#f0c987}
+
+/* product/intro cards on dark */
+.split .media{box-shadow:var(--shadow)}
+.prod-card{box-shadow:none;border:1px solid var(--line)}
+
+/* sand section reads as a raised panel */
+.sec.panel{background:var(--sand)}
+
+/* eyebrow underline accent */
+.eyebrow{color:#f0c987}
+
+/* CTA gradient → amber/black */
+.cta::after{background:linear-gradient(rgba(185,126,54,.55),rgba(11,12,16,.94))}
+
+/* footer matches page */
+.footer{background:#0b0c10}
+
+/* nav menu (mobile) dark */
+@media(max-width:820px){
+  .nav{background:#16171d}
+  .nav a{color:var(--ink);border-bottom:1px solid var(--line)}
+}
+
+/* white cards in base CSS -> dark panels so they read on the dark page */
+.branch,.form-card,.value,.brand-list .b,.cat-item,.brand-tabs button,
+.social-list li{background:#16171d;border-color:var(--line);color:var(--ink)}
+.branch a{color:var(--ink)} .branch a:hover{color:var(--brick)}
+.value .ico{background:#22242c;color:#f0c987}
+.brand-list .b b,.cat-item summary h3{color:#fff}
+.cat-item summary:hover{background:#1f2129}
+.cat-item summary .count{background:#22242c;color:#f0c987}
+.brand-tabs button.active,.brand-tabs button:hover{background:#f0c987;color:#1a1206;border-color:#f0c987}
+/* form fields on dark */
+.field input,.field textarea,.field select{background:#16171d;color:var(--ink);border-color:var(--line)}
+.field input:focus,.field textarea:focus,.field select:focus{background:#1f2129;border-color:var(--brick);box-shadow:0 0 0 4px rgba(217,154,78,.18)}
+.swatch .ph{background:#22242c}
